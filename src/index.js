@@ -96,8 +96,11 @@ function showCity(cityData) {
 
 function searchCity(cityInput) {
   let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=${units}`;
-  axios.get(apiUrlCity).then(showCity);
-  axios.get(apiUrlCity).then(showTemp);
+  axios.get(apiUrlCity).then((data) => {
+    console.log('data', data);
+    showCity(data);
+    showTemp(data);
+  });
 }
 
 let showCityElement = document.querySelector("#search-city");
