@@ -1,0 +1,178 @@
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #ffffff;
+}
+
+.background-image {
+  background-image: url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/084/957/original/sun_background.jpg?1686315185");
+  background-size: auto;
+  background-position: center;
+  max-width: 600px;
+  height: 95vh;
+  margin: 20px auto;
+  padding: 50px 50px 40px 50px;
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.input-group {
+  position: relative;
+  display: block;
+}
+
+.search-bar {
+  border: rgba(255, 255, 255, 0.24);
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  height: 36px;
+  width: 40%;
+  font-weight: 300;
+  padding-left: 10px;
+}
+
+.search-box {
+  background-color: rgba(255, 255, 255, 0.24);
+  border: rgba(255, 255, 255, 0.24);
+  color: #fffffff5;
+  font-weight: 300;
+  transform: all 200ms ease-in-out;
+}
+
+.search-box:hover {
+  background-color: rgb(236, 231, 198);
+  border: rgb(236, 231, 198);
+}
+
+#current-location-button {
+  background-color: rgba(230, 177, 124);
+  border: rgba(255, 255, 255, 0.24);
+  color: #fffffff5;
+  font-weight: 300;
+  transform: all 200ms ease-in-out;
+}
+
+#current-location-button:hover {
+  background-color: rgb(236, 231, 198);
+  border: rgb(236, 231, 198);
+}
+
+.current-temp {
+  color: #ffffff;
+  font-size: 35px;
+  vertical-align: top;
+  font-weight: lighter;
+}
+
+.current-temp-degrees,
+#current-temp-num {
+  font-size: 80px;
+  font-weight: bold;
+}
+
+.current-temp-celsius,
+.current-temp-bar,
+.current-temp-fahrenheit {
+  font-size: 30px;
+  text-decoration: none;
+  color: #ffffff;
+  vertical-align: top;
+  font-weight: normal;
+  line-height: 100px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.selectedTemperature {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#city-name {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: lighter;
+}
+
+#current-date {
+  color: #ffffff;
+}
+
+.today {
+  width: 150px;
+  margin: 0 0 6px;
+}
+
+.current-weather {
+  margin-top: 20px;
+}
+
+.conditions {
+  font-size: 13px;
+  color: #ffffff;
+}
+
+h2 {
+  font-weight: bolder;
+}
+
+.weather-week {
+  width: 100%;
+  height: 150px;
+  margin-top: 325px;
+  color: #ffffff;
+  font-size: 16px;
+}
+.days {
+  width: 100px;
+  height: auto;
+}
+
+.temperatures {
+  width: 100%;
+  height: 80px;
+}
+
+.flex {
+  flex: 1;
+}
+
+.row-custom {
+  display: flex;
+  flex-direction: row;
+}
+
+.column-custom {
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom {
+  font-size: 12px;
+  text-align: center;
+  display: block;
+  margin-top: 5px;
+}
+
+.start-center {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.center-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.center-end {
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.space-between-center {
+  justify-content: space-between;
+  align-items: center;
+}
