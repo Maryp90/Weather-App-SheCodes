@@ -150,11 +150,23 @@ h2 {
   flex-direction: column;
 }
 
+.githubLink {
+  color:#ffffff;
+  font-size: 14px;
+  margin-top: 5px;
+  text-decoration: none;
+}
+
+.githubLink:hover {
+  color: rgb(236, 231, 198);
+  text-decoration: underline;
+}
+
 .bottom {
   font-size: 12px;
   text-align: center;
   display: block;
-  margin-top: 5px;
+  margin-top: 20px;
 }
 
 .start-center {
