@@ -1,35 +1,53 @@
-//Code to get the weather API information 
+//Global Variables
 let apiKey = "26415e217d517b2635491d848dd18196";
 let units = "metric";
 
+let currentTempHTML = document.querySelector("#current-temp-num");
+let fahrenheitHTML = document.querySelector("#fahrenheit");
+let celsiusHTML = document.querySelector("#celsius");
 
-function currentLocation(position) {
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-  //console.log(lat);
-  //console.log(lon);
+let currentTypeTemp = "celsius";
+let currentTemp;
 
-  axios.get(apiUrl).then(showLocation);
-  axios.get(apiUrl).then(showCurrentTemp);
+let city;
+
+let showCityElement = document.querySelector("#search-city");
+
+let currentLocationBtn = document.querySelector("#current-location-button");
+
+function convertToFahrenheit(celsius) {
+  let fahrenheit = (celsius * 9) / 5 + 32;
+  return fahrenheit;
+}
+    
+function convertToCelsius(fahrenheit) {
+  let celsius = ((fahrenheit - 32) * 5) / 9;
+  return celsius;
 }
 
+function temperatureConversion(temperatureType) {
+  if (temperatureType === "fahrenheit" && currentTypeTemp !== "fahrenheit") {
+    currentTempHTML.innerHTML = Math.round(convertToFahrenheit(currentTemp));
+    currentTemp = convertToFahrenheit(currentTemp);
+    fahrenheitHTML.classList.add("selectedTemperature");
+    celsiusHTML.classList.remove("selectedTemperature");
+  } else if (temperatureType === "celsius" && currentTypeTemp !== "celsius") {
+    currentTempHTML.innerHTML = Math.round(convertToCelsius(currentTemp));
+    currentTemp = convertToCelsius(currentTemp);
+    celsiusHTML.classList.add("selectedTemperature");
+    fahrenheitHTML.classList.remove("selectedTemperature");
+  }
+  currentTypeTemp = temperatureType;
+}
 
-navigator.geolocation.getCurrentPosition(currentLocation);
-
-function showLocation(location) {
-  let currentLocation = location.data.name;
-  //console.log(currentLocation);
-  //console.log(location);
+function setupCityInfo (data) {
+  //retrieve city
+  let currentLocation = data.data.name;
   let currentLocationHTML = document.querySelector("#city-name");
   currentLocationHTML.innerHTML = currentLocation;
-}
 
-
-function showCurrentTemp(response) {
-  let currentTemp = Math.round(response.data.main.temp);
-  //console.log(currentTemp);
-  //console.log(response);
+  //retrieve temperature
+  currentTemp = Math.round(data.data.main.temp);
   let currentTempHTML = document.querySelector("#current-temp-num");
   currentTempHTML.innerHTML = currentTemp;
   
@@ -42,121 +60,64 @@ function showCurrentTemp(response) {
   fahrenheitElement.addEventListener("click", function() {
     temperatureConversion("fahrenheit");
   });
+}
 
-  let currentTypeTemp = "celsius";
+function resetTempType() {
+  currentTypeTemp = "celsius";
+  celsiusHTML.classList.add("selectedTemperature");
+  fahrenheitHTML.classList.remove("selectedTemperature");
+}
 
-  function temperatureConversion(temperatureType) {
-    let currentTempHTML = document.querySelector("#current-temp-num");
-    let fahrenheitHTML = document.querySelector("#fahrenheit");
-    let celsiusHTML = document.querySelector("#celsius");
-
-    if (temperatureType === "fahrenheit" && currentTypeTemp !== "fahrenheit") {
-      currentTempHTML.innerHTML = Math.round(convertToFahrenheit(currentTemp));
-      currentTemp = convertToFahrenheit(currentTemp);
-      fahrenheitHTML.classList.add("selectedTemperature");
-      celsiusHTML.classList.remove("selectedTemperature");
-    } else if (temperatureType === "celsius" && currentTypeTemp !== "celsius") {
-      currentTempHTML.innerHTML = Math.round(convertToCelsius(currentTemp));
-      currentTemp = convertToCelsius(currentTemp);
-      celsiusHTML.classList.add("selectedTemperature");
-      fahrenheitHTML.classList.remove("selectedTemperature");
-    }
-    currentTypeTemp = temperatureType;
-  }
-  function convertToFahrenheit(celsius) {
-    let fahrenheit = (celsius * 9) / 5 + 32;
-    return fahrenheit;
-  }
+// Code to get the API information about current location
+function getCurrentLocation() {
+  resetTempType();
+  navigator.geolocation.getCurrentPosition((position) => {
+    console.log('cenas');
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+    axios.get(apiUrl).then((data) => {
+      console.log('data-current-location', data);
+      setupCityInfo(data);
+    }).catch((error) => {
+      console.log("error", error);
+    });
+  });
   
-  function convertToCelsius(fahrenheit) {
-    let celsius = ((fahrenheit - 32) * 5) / 9;
-    return celsius;
 }
-  }
-
-function getCurrentLocation(){
-  navigator.geolocation.getCurrentPosition(currentLocation);
-}
-let currentLocationBtn = document.querySelector("#current-location-button");
 currentLocationBtn.addEventListener("click", getCurrentLocation);
 
 
-
-let city;
-
-function showCity(cityData) {
-  let showCitySearch = cityData.data.name;
-  //console.log(showCitySearch);
-  //console.log(cityData);
-  let showCitySearchHTML = document.querySelector("#city-name");
-  showCitySearchHTML.innerHTML = showCitySearch;
-
-  city = showCitySearch;
-}
-
+// Code to get the API information about searched city
 function searchCity(cityInput) {
   let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrlCity).then((data) => {
     console.log('data', data);
-    showCity(data);
-    showTemp(data);
+    setupCityInfo(data);
+  }, (error) => {
+    alert("City does not exist. Please submit a valid city.");
+    let cityInput = document.querySelector("#search-city-input");
+    cityInput.value = "";
+    console.log("error", error);
   });
 }
 
-let showCityElement = document.querySelector("#search-city");
 showCityElement.addEventListener("submit", function(event) {
   event.preventDefault();
+  console.log('Joao');
+  resetTempType();
   let cityInput = document.querySelector("#search-city-input").value;
+  city = cityInput;
+  if (!cityInput) {
+    alert("Please enter a City!");
+  } else {
   searchCity(cityInput);
+  }
 });
 
-function showTemp(temperature) {
-  let searchCityTemp = Math.round(temperature.data.main.temp);
-  //console.log(searchCityTemp);
-  //console.log(temperature);
-  let searchCityTempHTML = document.querySelector("#current-temp-num");
-  searchCityTempHTML.innerHTML = searchCityTemp;
+//init
+getCurrentLocation();
 
-  let celsiusElement = document.querySelector("#celsius");
-  celsiusElement.addEventListener("click", function() {
-    temperatureConversion("celsius");
-  });
-
-  let fahrenheitElement = document.querySelector("#fahrenheit");
-  fahrenheitElement.addEventListener("click", function() {
-    temperatureConversion("fahrenheit");
-  });
-
-  let currentTypeTemp = "celsius";
-
-  function temperatureConversion(temperatureType) {
-    let currentTempHTML = document.querySelector("#current-temp-num");
-    let fahrenheitHTML = document.querySelector("#fahrenheit");
-    let celsiusHTML = document.querySelector("#celsius");
-
-    if (temperatureType === "fahrenheit" && currentTypeTemp !== "fahrenheit") {
-      currentTempHTML.innerHTML = Math.round(convertToFahrenheit(searchCityTemp));
-      searchCityTemp = convertToFahrenheit(searchCityTemp);
-      fahrenheitHTML.classList.add("selectedTemperature");
-      celsiusHTML.classList.remove("selectedTemperature");
-    } else if (temperatureType === "celsius" && currentTypeTemp !== "celsius") {
-      currentTempHTML.innerHTML = Math.round(convertToCelsius(searchCityTemp));
-      searchCityTemp = convertToCelsius(searchCityTemp);
-      celsiusHTML.classList.add("selectedTemperature");
-      fahrenheitHTML.classList.remove("selectedTemperature");
-    }
-    currentTypeTemp = temperatureType;
-  }
-  function convertToFahrenheit(celsius) {
-    let fahrenheit = (celsius * 9) / 5 + 32;
-    return fahrenheit;
-  }
-  
-  function convertToCelsius(fahrenheit) {
-    let celsius = ((fahrenheit - 32) * 5) / 9;
-    return celsius;
-  }
-}
 
 //Code to change weekly days and to get the information about today's weekday and time
 let now = new Date();
