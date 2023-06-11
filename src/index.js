@@ -141,8 +141,8 @@ currentDate.innerHTML = `${weekDay}, ${hours}:${minutes}`;
 
 let backgroundElement = document.querySelector(".background-image");
 
-if (hours >= 19) {
-  backgroundElement.classList.add("background-image-night");
-} else {
+if (hours >= 8 && hours <19) {
   backgroundElement.classList.add("background-image-day");
+} else {
+  backgroundElement.classList.add("background-image-night");
 }
