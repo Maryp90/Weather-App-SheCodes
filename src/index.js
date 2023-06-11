@@ -139,15 +139,10 @@ let minutes = String(now.getMinutes()).padStart(2, "0");
 let currentDate = document.querySelector("#current-date");
 currentDate.innerHTML = `${weekDay}, ${hours}:${minutes}`;
 
-function search(event) {
-  event.preventDefault();
-  let searchInput = document.querySelector("#search-city-input");
+let backgroundElement = document.querySelector(".background-image");
 
-  let cityName = document.querySelector("#city-name");
-
-  if (searchInput.value) {
-    cityName.innerHTML = searchInput.value;
-  } else {
-    alert("Please enter a city");
-  }
+if (hours >= 19) {
+  backgroundElement.classList.add("background-image-night");
+} else {
+  backgroundElement.classList.add("background-image-day");
 }
