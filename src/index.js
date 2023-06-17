@@ -1,5 +1,5 @@
 //Global Variables
-let apiKey = "26415e217d517b2635491d848dd18196";
+let apiKey = "f3t5b36ab43852690f35359144ebo9d6";
 let units = "metric";
 
 let currentTempHTML = document.querySelector("#current-temp-num");
@@ -75,7 +75,7 @@ function getCurrentLocation() {
     console.log('cenas');
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=${units}`; 
     axios.get(apiUrl).then((data) => {
       console.log('data-current-location', data);
       setupCityInfo(data);
@@ -90,7 +90,7 @@ currentLocationBtn.addEventListener("click", getCurrentLocation);
 
 // Code to get the API information about searched city
 function searchCity(cityInput) {
-  let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&appid=${apiKey}&units=${units}`;
+  let apiUrlCity = `https://api.shecodes.io/weather/v1/current?query=${cityInput}&key=${apiKey}&units=${units}`;
   axios.get(apiUrlCity).then((data) => {
     console.log('data', data);
     setupCityInfo(data);
