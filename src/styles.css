@@ -106,7 +106,7 @@ body {
 }
 
 .icon-col {
-  text-align: right;
+  margin-right: 40px;
 }
 .current-weather-icon {
   height: 170px;
