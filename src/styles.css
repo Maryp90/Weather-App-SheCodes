@@ -115,11 +115,12 @@ body {
 
 .weather-conditions {
   margin-top: 15px;
-  margin-left: 50px;
-  padding: 0px 50px 0px 50px;
-  text-align: left;
+  text-align: center;
 }
 
+.icon-col {
+  padding-left: 120px;
+}
 .current-weather-icon {
   height: 170px;
 }
@@ -132,6 +133,7 @@ body {
 
 .conditions {
   padding-top: 30px;
+  text-align: left;
 }
 
 .weather-week {

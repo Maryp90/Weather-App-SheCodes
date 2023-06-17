@@ -103,10 +103,12 @@ currentLocationBtn.addEventListener("click", getCurrentLocation);
 // Code to get the API information about searched city
 function searchCity(cityInput) {
   let apiUrlCity = `https://api.shecodes.io/weather/v1/current?query=${cityInput}&key=${apiKey}&units=${units}`;
-  axios.get(apiUrlCity).then((data) => {
+  axios.get(apiUrlCity)
+  .then((data) => {
     console.log('data', data);
     setupCityInfo(data);
-  }, (error) => {
+  })
+  .catch((error) => {
     alert("City does not exist. Please submit a valid city.");
     let cityInput = document.querySelector("#search-city-input");
     cityInput.value = "";
