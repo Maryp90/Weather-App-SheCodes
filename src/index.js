@@ -149,9 +149,6 @@ let weekDay = days[now.getDay()];
 let hours = String(now.getHours()).padStart(2, "0");
 let minutes = String(now.getMinutes()).padStart(2, "0");
 
-let currentDate = document.querySelector("#current-date");
-currentDate.innerHTML = `${weekDay}, ${hours}:${minutes}`;
-
 let containerElement = document.querySelector("#container");
 
 if (hours >= 8 && hours <20) {
