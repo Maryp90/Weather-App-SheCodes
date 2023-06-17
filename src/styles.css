@@ -19,7 +19,7 @@ body {
 }
 
 .container-night {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/084/954/original/background2.jpg?1686313030");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), url('https://s3.amazonaws.com/shecodesio-production/uploads/files/000/084/954/original/background2.jpg?1686313030');
   background-size: auto;
   background-position: center;
   max-width: 600px;
@@ -74,7 +74,7 @@ body {
   font-size: 35px;
   vertical-align: top;
   font-weight: lighter;
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 .current-temp-degrees,
@@ -102,7 +102,7 @@ body {
 }
 
 .city-name {
-  padding: 50px 20px 10px 20px;
+  padding: 20px 20px 10px 20px;
   color: #ffffff;
   font-size: 40px;
   font-weight: lighter;
@@ -114,7 +114,7 @@ body {
 }
 
 .weather-conditions {
-  margin-top: 50px;
+  margin-top: 15px;
   margin-left: 50px;
   padding: 0px 50px 0px 50px;
   text-align: left;
@@ -137,7 +137,7 @@ body {
 .weather-week {
   width: 100%;
   height: 100%;
-  margin-top: 71px;
+  margin-top: 70px;
   margin-bottom: 60px;
   color: #ffffff;
   font-size: 16px;
