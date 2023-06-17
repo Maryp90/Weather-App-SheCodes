@@ -60,6 +60,12 @@ function setupCityInfo (data) {
   fahrenheitElement.addEventListener("click", function() {
     temperatureConversion("fahrenheit");
   });
+
+  let humidityElement = document.querySelector("#humidity");
+  humidityElement.innerHTML = data.data.temperature.humidity;
+
+  let windElement = document.querySelector("#wind");
+  windElement.innerHTML = data.data.wind.speed;
 }
 
 function resetTempType() {
@@ -137,10 +143,10 @@ let minutes = String(now.getMinutes()).padStart(2, "0");
 let currentDate = document.querySelector("#current-date");
 currentDate.innerHTML = `${weekDay}, ${hours}:${minutes}`;
 
-let backgroundElement = document.querySelector(".background-image");
+let backgroundElement = document.querySelector("container");
 
 if (hours >= 8 && hours <19) {
-  backgroundElement.classList.add("background-image-day");
+  backgroundElement.classList.add("container-day");
 } else {
-  backgroundElement.classList.add("background-image-night");
+  backgroundElement.classList.add("container-night");
 }
