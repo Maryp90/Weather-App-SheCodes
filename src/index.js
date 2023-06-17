@@ -154,5 +154,5 @@ let containerElement = document.querySelector("#container");
 if (hours >= 8 && hours <20) {
   containerElement.style.backgroundImage = "container";
 } else {
-  containerElement.style.backgroundImage = "url('https://s3.amazonaws.com/shecodesio-production/uploads/files/000/086/171/original/ezgif.com-crop.jpg?1687040728')";
+  containerElement.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://s3.amazonaws.com/shecodesio-production/uploads/files/000/086/173/original/ezgif.com-crop_%282%29.jpg?1687041125')";
 }
