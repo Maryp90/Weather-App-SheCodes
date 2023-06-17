@@ -61,11 +61,18 @@ function setupCityInfo (data) {
     temperatureConversion("fahrenheit");
   });
 
+  let iconElement = document.querySelector("#icon-current");
+  iconElement.setAttribute("src",`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${data.data.condition.icon}.png`);
+
+  let currentConditionElement = document.querySelector("#current-condition");
+  currentConditionElement.innerHTML = data.data.condition.description.toUppercase();
+
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = data.data.temperature.humidity;
 
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = data.data.wind.speed;
+
 }
 
 function resetTempType() {
