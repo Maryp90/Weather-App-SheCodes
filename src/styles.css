@@ -4,8 +4,22 @@ body {
   color: #ffffff;
 }
 
-.background-image {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/084/957/original/sun_background.jpg?1686315185");
+.container {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), url('https://s3.amazonaws.com/shecodesio-production/uploads/files/000/084/953/original/background.png?1686312770');
+  background-size: auto;
+  background-repeat: no-repeat;
+  margin: 20px auto;
+  padding: 50px 50px 40px 50px;
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 600px;
+  height: 100%;
+
+}
+
+.container-night {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/084/954/original/background2.jpg?1686313030");
   background-size: auto;
   background-position: center;
   max-width: 600px;
@@ -16,20 +30,7 @@ body {
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
-
-.background-image-night {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), url("https://s3.amazonaws.com/shecodesio-production/uploads/files/000/085/205/original/moon_background.jpg?1686502585");
-  background-size: auto;
-  background-position: center;
-  max-width: 600px;
-  height: 100%;
-  margin: 20px auto;
-  padding: 50px 50px 40px 50px;
-  border-radius: 8px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
-
+*/
 .input-group {
   position: relative;
   display: block;
