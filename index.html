@@ -31,13 +31,13 @@
          />
           <button
           type="submit"
-          class="btn btn-outline-secondary search-box"
+          class="btn btn-primary search-box"
           placeholder="Search"
-          >Submit</button>
-          <button type="button" class="btn btn-success w-10 current-location" id="current-location-button">Current Location</button>
+          >Search</button>
+        <button type="button" class="btn btn-link current-location" id="current-location-button">Current Location</button>
         </form>
         <div class="current-temp">
-          <span id="current-temp-num"></span>
+          <span class="current-temp-num" id="current-temp-num"></span>
           <span class="current-temp-degrees">º</span>
           <span>
             <span
@@ -50,9 +50,8 @@
             id="fahrenheit">F</span>
         </span>
         </div>
-        <h1 id="city-name">Lisbon</h1>
+        <h1 class="city-name" id="city-name">Lisbon</h1>
         <span class="date" id="current-date">Tuesday 9:30 pm</span>
-     
         <div class="row-custom space-between-center weather-week">
           <div class="column-custom center-center">
             <span>Today</span>
@@ -85,9 +84,9 @@
           <span><strong>25º</strong> 15º</span>
         </div>
       </div>
-      <a href="https://github.com/Maryp90/Weather-App-SheCodes" target="_blank" class="githubLink">GitHub Repository</a>
-      <span class="bottom"
-        >Page coded by <em>Mariana Pereira</em></span>
+      <small>
+        <a href="https://github.com/Maryp90/Weather-App-SheCodes" target="_blank" class="githubLink">Open-source code</a> by Mariana Pereira
+      </small>
     </div>
     <script type="text/javascript" src="src/index.js"></script>
   </body>
