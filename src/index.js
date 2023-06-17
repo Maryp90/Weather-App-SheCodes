@@ -65,7 +65,7 @@ function setupCityInfo (data) {
   iconElement.setAttribute("src",`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${data.data.condition.icon}.png`);
 
   let currentConditionElement = document.querySelector("#current-condition");
-  currentConditionElement.innerHTML = data.data.condition.description.toUppercase();
+  currentConditionElement.innerHTML = data.data.condition.description;
 
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = data.data.temperature.humidity;
