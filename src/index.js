@@ -42,12 +42,12 @@ function temperatureConversion(temperatureType) {
 
 function setupCityInfo (data) {
   //retrieve city
-  let currentLocation = data.data.name;
+  let currentLocation = data.data.city;
   let currentLocationHTML = document.querySelector("#city-name");
   currentLocationHTML.innerHTML = currentLocation;
 
   //retrieve temperature
-  currentTemp = Math.round(data.data.main.temp);
+  currentTemp = Math.round(data.data.temperature.current);
   let currentTempHTML = document.querySelector("#current-temp-num");
   currentTempHTML.innerHTML = currentTemp;
   
@@ -72,7 +72,6 @@ function resetTempType() {
 function getCurrentLocation() {
   resetTempType();
   navigator.geolocation.getCurrentPosition((position) => {
-    console.log('cenas');
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
     let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=${units}`; 
@@ -104,7 +103,6 @@ function searchCity(cityInput) {
 
 showCityElement.addEventListener("submit", function(event) {
   event.preventDefault();
-  console.log('Joao');
   resetTempType();
   let cityInput = document.querySelector("#search-city-input").value;
   city = cityInput;
