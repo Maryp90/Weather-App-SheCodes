@@ -67,7 +67,8 @@ function temperatureConversion(temperatureType) {
   currentTypeTemp = temperatureType;
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
@@ -83,22 +84,26 @@ function displayForecast() {
       </div>
     </div>`;
   })
-  
-  
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-  
 }
 
 
-function setupCityInfo (data) {
+function getForecast(coordinates) {
+  console.log('coordinates', coordinates);
+  let apiUrlForecast = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=${units}`;
+  console.log(apiUrlForecast);
+  axios.get(apiUrlForecast).then(displayForecast);
+}
+
+function setupCityInfo(response) {
   //retrieve city
-  let currentLocation = data.data.city;
+  let currentLocation = response.data.city;
   let currentLocationHTML = document.querySelector("#city-name");
   currentLocationHTML.innerHTML = currentLocation;
 
   //retrieve temperature
-  currentTemp = Math.round(data.data.temperature.current);
+  currentTemp = Math.round(response.data.temperature.current);
   let currentTempHTML = document.querySelector("#current-temp-num");
   currentTempHTML.innerHTML = currentTemp;
   
@@ -113,18 +118,18 @@ function setupCityInfo (data) {
   });
 
   let iconElement = document.querySelector("#icon-current");
-  iconElement.setAttribute("src",`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${data.data.condition.icon}.png`);
+  iconElement.setAttribute("src",`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`);
 
   let currentConditionElement = document.querySelector("#current-condition");
-  currentConditionElement.innerHTML = data.data.condition.description;
+  currentConditionElement.innerHTML = response.data.condition.description;
 
   let humidityElement = document.querySelector("#humidity");
-  humidityElement.innerHTML = data.data.temperature.humidity;
+  humidityElement.innerHTML = response.data.temperature.humidity;
 
   let windElement = document.querySelector("#wind");
-  windElement.innerHTML = data.data.wind.speed;
+  windElement.innerHTML = response.data.wind.speed;
 
-  getForecast(data.data.coordinates);
+  getForecast(response.data.coordinates);
 }
 
 function resetTempType() {
@@ -182,5 +187,3 @@ showCityElement.addEventListener("submit", function(event) {
 
 //init
 getCurrentLocation();
-
-displayForecast();
