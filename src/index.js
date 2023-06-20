@@ -144,6 +144,9 @@ let days = [
   "Friday",
   "Saturday"
 ];
+
+let apiKeyForecast = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKeyForecast}&units=${units}`;
+
 let weekDay = days[now.getDay()];
 
 let hours = String(now.getHours()).padStart(2, "0");
