@@ -18,18 +18,6 @@ let currentLocationBtn = document.querySelector("#current-location-button");
 //Code to change weekly days and to get the information about today's weekday and time
 let now = new Date();
 
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday"
-];
-
-let weekDay = days[now.getDay()];
-
 let hours = String(now.getHours()).padStart(2, "0");
 let minutes = String(now.getMinutes()).padStart(2, "0");
 
@@ -67,22 +55,32 @@ function temperatureConversion(temperatureType) {
   currentTypeTemp = temperatureType;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
-  let day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  day.forEach(function(day) {
+  forecast.forEach(function(forecastDay, index) {
+    if(index >0 && index < 7) {
     forecastHTML = forecastHTML + `
     <div class="col-2">
-      <div class="weather-forecast-date">${day}</div>
-      <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/scattered-clouds-day.png" alt="" class="forecast-image"/>
+      <div class="weather-forecast-date">${formatDay(forecastDay.time)}</div>
+
+      <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${forecastDay.condition.icon}.png" alt="" class="forecast-image"/>
       <div class="weather-forescat-temp">
-        <span class="weather-forecast-temp-max">23</span>
-        <span class="weather-forecast-temp-min">13</span>
+        <span class="weather-forecast-temp-max">${Math.round(forecastDay.temperature.maximum)}º</span>
+        <span class="weather-forecast-temp-min">${Math.round(forecastDay.temperature.minimum)}º</span>
       </div>
     </div>`;
+  }
   })
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
