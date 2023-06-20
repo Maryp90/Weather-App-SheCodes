@@ -3,10 +3,10 @@ let apiKey = "f3t5b36ab43852690f35359144ebo9d6";
 let units = "metric";
 
 let currentTempHTML = document.querySelector("#current-temp-num");
-/*let fahrenheitHTML = document.querySelector("#fahrenheit");
-let celsiusHTML = document.querySelector("#celsius");*/
+let fahrenheitHTML = document.querySelector("#fahrenheit");
+let celsiusHTML = document.querySelector("#celsius");
 
-/*let currentTypeTemp = "celsius";*/
+let currentTypeTemp = "celsius";
 let currentTemp;
 
 let city;
@@ -30,7 +30,7 @@ if (hours >= 8 && hours <20) {
 }
 
 
-/*function convertToFahrenheit(celsius) {
+function convertToFahrenheit(celsius) {
   let fahrenheit = (celsius * 9) / 5 + 32;
   return fahrenheit;
 }
@@ -53,7 +53,7 @@ function temperatureConversion(temperatureType) {
     fahrenheitHTML.classList.remove("selectedTemperature");
   }
   currentTypeTemp = temperatureType;
-}*/
+}
 
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
@@ -105,7 +105,7 @@ function setupCityInfo(response) {
   let currentTempHTML = document.querySelector("#current-temp-num");
   currentTempHTML.innerHTML = currentTemp;
   
-  /*let celsiusElement = document.querySelector("#celsius");
+  let celsiusElement = document.querySelector("#celsius");
   celsiusElement.addEventListener("click", function() {
     temperatureConversion("celsius");
   });
@@ -113,7 +113,7 @@ function setupCityInfo(response) {
   let fahrenheitElement = document.querySelector("#fahrenheit");
   fahrenheitElement.addEventListener("click", function() {
     temperatureConversion("fahrenheit");
-  });*/
+  });
 
   let iconElement = document.querySelector("#icon-current");
   iconElement.setAttribute("src",`http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`);
@@ -130,15 +130,15 @@ function setupCityInfo(response) {
   getForecast(response.data.coordinates);
 }
 
-/*function resetTempType() {
+function resetTempType() {
   currentTypeTemp = "celsius";
   celsiusHTML.classList.add("selectedTemperature");
   fahrenheitHTML.classList.remove("selectedTemperature");
-}*/
+}
 
 // Code to get the API information about current location
 function getCurrentLocation() {
-  //resetTempType();
+  resetTempType();
   navigator.geolocation.getCurrentPosition((position) => {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;

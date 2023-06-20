@@ -85,7 +85,7 @@ body {
 
 .selectedTemperature {
   font-weight: bold;
-  font-size: 30px;
+  text-decoration: underline;
 }
 
 .city-name {
