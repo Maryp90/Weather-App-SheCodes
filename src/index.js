@@ -15,7 +15,7 @@ let showCityElement = document.querySelector("#search-city");
 
 let currentLocationBtn = document.querySelector("#current-location-button");
 
-//Code to change weekly days and to get the information about today's weekday and time
+//Code to change the background image taking into consideration the hours
 let now = new Date();
 
 let hours = String(now.getHours()).padStart(2, "0");
