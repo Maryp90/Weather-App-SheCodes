@@ -15,6 +15,33 @@ let showCityElement = document.querySelector("#search-city");
 
 let currentLocationBtn = document.querySelector("#current-location-button");
 
+//Code to change weekly days and to get the information about today's weekday and time
+let now = new Date();
+
+let days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
+
+let weekDay = days[now.getDay()];
+
+let hours = String(now.getHours()).padStart(2, "0");
+let minutes = String(now.getMinutes()).padStart(2, "0");
+
+let containerElement = document.querySelector("#container");
+
+if (hours >= 8 && hours <20) {
+  containerElement.style.backgroundImage = "container";
+} else {
+  containerElement.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://s3.amazonaws.com/shecodesio-production/uploads/files/000/086/173/original/ezgif.com-crop_%282%29.jpg?1687041125')";
+}
+
+
 function convertToFahrenheit(celsius) {
   let fahrenheit = (celsius * 9) / 5 + 32;
   return fahrenheit;
@@ -39,6 +66,30 @@ function temperatureConversion(temperatureType) {
   }
   currentTypeTemp = temperatureType;
 }
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  day.forEach(function(day) {
+    forecastHTML = forecastHTML + `
+    <div class="col-2">
+      <div class="weather-forecast-date">${day}</div>
+      <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/scattered-clouds-day.png" alt="" class="forecast-image"/>
+      <div class="weather-forescat-temp">
+        <span class="weather-forecast-temp-max">23</span>
+        <span class="weather-forecast-temp-min">13</span>
+      </div>
+    </div>`;
+  })
+  
+  
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+  
+}
+
 
 function setupCityInfo (data) {
   //retrieve city
@@ -73,6 +124,7 @@ function setupCityInfo (data) {
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = data.data.wind.speed;
 
+  getForecast(data.data.coordinates);
 }
 
 function resetTempType() {
@@ -105,7 +157,7 @@ function searchCity(cityInput) {
   let apiUrlCity = `https://api.shecodes.io/weather/v1/current?query=${cityInput}&key=${apiKey}&units=${units}`;
   axios.get(apiUrlCity)
   .then((data) => {
-    console.log('data', data);
+    //console.log('data', data);
     setupCityInfo(data);
   })
   .catch((error) => {
@@ -131,31 +183,4 @@ showCityElement.addEventListener("submit", function(event) {
 //init
 getCurrentLocation();
 
-
-//Code to change weekly days and to get the information about today's weekday and time
-let now = new Date();
-
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday"
-];
-
-let apiKeyForecast = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKeyForecast}&units=${units}`;
-
-let weekDay = days[now.getDay()];
-
-let hours = String(now.getHours()).padStart(2, "0");
-let minutes = String(now.getMinutes()).padStart(2, "0");
-
-let containerElement = document.querySelector("#container");
-
-if (hours >= 8 && hours <20) {
-  containerElement.style.backgroundImage = "container";
-} else {
-  containerElement.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://s3.amazonaws.com/shecodesio-production/uploads/files/000/086/173/original/ezgif.com-crop_%282%29.jpg?1687041125')";
-}
+displayForecast();
