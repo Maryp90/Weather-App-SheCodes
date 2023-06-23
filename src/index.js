@@ -43,14 +43,17 @@ function convertToCelsius(fahrenheit) {
 function temperatureConversion(temperatureType) {
   if (temperatureType === "fahrenheit" && currentTypeTemp !== "fahrenheit") {
     currentTempHTML.innerHTML = Math.round(convertToFahrenheit(currentTemp));
-    currentTemp = convertToFahrenheit(currentTemp);
     fahrenheitHTML.classList.add("selectedTemperature");
     celsiusHTML.classList.remove("selectedTemperature");
+    units = "imperial";
+    searchCity(city);
+    console.log("city", city);
   } else if (temperatureType === "celsius" && currentTypeTemp !== "celsius") {
     currentTempHTML.innerHTML = Math.round(convertToCelsius(currentTemp));
-    currentTemp = convertToCelsius(currentTemp);
     celsiusHTML.classList.add("selectedTemperature");
     fahrenheitHTML.classList.remove("selectedTemperature");
+    units = "metric";
+    searchCity(city);
   }
   currentTypeTemp = temperatureType;
 }
@@ -144,6 +147,7 @@ function getCurrentLocation() {
     let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=${units}`; 
     axios.get(apiUrl).then((data) => {
       console.log('data-current-location', data);
+      city = data.data.city;
       setupCityInfo(data);
     }).catch((error) => {
       console.log("error", error);
