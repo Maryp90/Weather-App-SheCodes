@@ -5,7 +5,7 @@ body {
 }
 
 .container {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://s3.amazonaws.com/shecodesio-production/uploads/files/000/086/172/original/ezgif.com-crop_%281%29.jpg?1687041047');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)), url('https://s3.amazonaws.com/shecodesio-production/uploads/files/000/086/172/original/ezgif.com-crop_%281%29.jpg?1687041047');
   background-repeat: no-repeat;
   margin: 20px auto;
   padding: 50px 0px 50px 0px;
